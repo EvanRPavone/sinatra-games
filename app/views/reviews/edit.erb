@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sinatra Game Reviews: Edit</title>
+    <link href="/stylesheets/styles.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <header>
+        <img src="/images/controller.png" class="logo">
+        <nav>
+            <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/reviews">Game Reviews</a></li>
+            <li><a href="/reviews/new">Write a Review</a></li>
+            <li><a href="/show_review">Your Reviews</a></li>
+            <li><a href="/logout">Logout</a></li>
+            <li>| <strong>User:</strong> <%= current_user.username %> |</li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+    <section id="edit-page">
+        <div class="section-inner">
+            <h2>Edit Game Review</h2>
+            <form action="/reviews/<%= @review.id %>" method="post" >
+            <input id="hidden" type="hidden" name="_method" value="patch">
+            
+            
+            <h3>Edit Review:</h3>
+            <label for="game">Game:</label><br>
+            <input type="text" name="game" id="game" value="<%=@review.game%>"><br><br>
+            <textarea id="content" name="content" rows="4" cols="50"><%=@review.content%></textarea><br>
+            <input type="submit" value="Submit" id ="submit">
+            
+            <form action="reviews/:id/delete" method="POST">
+            <input="submit" value="Delete Review">
+            </form>
+            </form>
+        </div>
+    </section>
+    </main>
+    <footer>
+        Flatiron: Sinatra Portfolio Project
+    </footer>
+</body>
+</html>
