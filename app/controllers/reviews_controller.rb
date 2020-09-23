@@ -26,7 +26,6 @@ class ReviewsController < ApplicationController
             @review.save
             redirect to "/reviews"
         else
-            flash[:empty_review_error] = "Unable to create blank reviews."
             redirect to "/reviews/new"
         end
     end
