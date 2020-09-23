@@ -21,8 +21,10 @@ class ReviewsController < ApplicationController
     post '/reviews' do
         @user = current_user
         if !params["content"].empty? || !params["game"].empty?
-            @review = Review.create(:content => params["content"], :game => params["game"], user: @user)
-            @review.user_id = @user.id
+            # @review = Review.create(:content => params["content"], :game => params["game"], user: @user)
+            # @review.user_id = @user.id
+            # @review.save
+            @review = current_user.reviews.build(params)
             @review.save
             redirect to "/reviews"
         else
@@ -44,10 +46,13 @@ class ReviewsController < ApplicationController
         if !logged_in?
             redirect '/login'
         end
-
         @review = Review.find_by_id(params[:id])
         @user = current_user
-        erb :'/reviews/edit'
+        if @review.user_id == @user.id
+            erb :'/reviews/edit'
+        else
+            redirect '/show_review'
+        end
     end
 
     get '/show_review' do
